@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { User, UserForm } from "@/type/User"
 
-interface FormProps {
-  onSubmitData: (data: UserForm, id?: string) => void
+type FormProps = {
+  onSubmitData: (data: UserForm) => void
   editUser: User | null
 }
 
-export default function Form({ onSubmitData, editUser }: FormProps) {
+const Form: FC<FormProps> = ({ onSubmitData, editUser }) => {
   const [formData, setFormData] = useState<UserForm>({
     first_name: "",
     last_name: "",
@@ -14,6 +14,7 @@ export default function Form({ onSubmitData, editUser }: FormProps) {
     gender: "",
   })
 
+  // faqat inputlarni tozalash uchun ishlatyapmiz
   useEffect(() => {
     if (editUser) {
       const { id, ...rest } = editUser
@@ -29,13 +30,17 @@ export default function Form({ onSubmitData, editUser }: FormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmitData(formData, editUser?.id)
+    onSubmitData(formData) // faqat POST ishlaydi
     setFormData({ first_name: "", last_name: "", region: "", gender: "" })
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col p-[10px] rounded-[3px] w-[300px] mx-auto mt-[100px] mb-[100px] bg-[#e7e7e7]  gap-2">
-      <input className="border pl-[5px] rounded-[3px] bg-[#fff]"
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col p-[10px] rounded-[3px] w-[300px] mx-auto mt-[100px] mb-[100px] bg-[#e7e7e7] gap-2"
+    >
+      <input
+        className="border pl-[5px] rounded-[3px] bg-[#fff]"
         name="first_name"
         value={formData.first_name}
         onChange={handleChange}
@@ -63,8 +68,10 @@ export default function Form({ onSubmitData, editUser }: FormProps) {
         placeholder="Gender"
       />
       <button type="submit" className="bg-[gray] text-white px-3 py-1 rounded">
-        {editUser ? "Update" : "Add"}
+        Add
       </button>
     </form>
   )
 }
+
+export default Form

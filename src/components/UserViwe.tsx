@@ -1,14 +1,15 @@
 import { User } from "@/type/User"
+import { FC } from "react"
 
-interface Props {
+type Props = {
   users: User[]
   onEdit: (user: User) => void
   onDelete: (id: string) => void
 }
 
-export default function UserView({ users, onEdit, onDelete }: Props) {
+const UserView: FC<Props> = ({ users, onEdit, onDelete }) => {
   return (
-    <div className="flex w-[300px] gap-3">
+    <div className="flex gap-3">
       {users.map((user) => (
         <div key={user.id} className="bg-[#e7e7e7] p-2 rounded">
           <div className="mb-[10px]">
@@ -17,7 +18,7 @@ export default function UserView({ users, onEdit, onDelete }: Props) {
             <p>Gender: {user.gender}</p>
           </div>
           <div className="flex h-[30px] w-[300px] gap-2">
-            <button 
+            <button
               onClick={() => onEdit(user)}
               className="bg-[gray] text-white px-2 rounded"
             >
@@ -35,3 +36,5 @@ export default function UserView({ users, onEdit, onDelete }: Props) {
     </div>
   )
 }
+
+export default UserView
