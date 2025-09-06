@@ -14,7 +14,6 @@ const Form: FC<FormProps> = ({ onSubmitData, editUser }) => {
     gender: "",
   })
 
-  // faqat inputlarni tozalash uchun ishlatyapmiz
   useEffect(() => {
     if (editUser) {
       const { id, ...rest } = editUser
