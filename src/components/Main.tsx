@@ -21,13 +21,24 @@ export default function Main() {
     getUsers()
   }, [])
 
-  const handleSubmit = (data: UserForm) => {
-    fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then(() => getUsers())
-      .finally(() => setEditUser(null))
+  const handleSubmit = (data: UserForm, id?: string) => {
+    if (id) {
+      fetch(`${API_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then(() => getUsers())
+        .finally(() => setEditUser(null))
+    } else {
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+        .then(() => getUsers())
+        .finally(() => setEditUser(null))
+    }
   }
 
   const handleDelete = (id: string) => {

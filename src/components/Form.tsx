@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react"
 import { User, UserForm } from "@/type/User"
 
 type FormProps = {
-  onSubmitData: (data: UserForm) => void
+  onSubmitData: (data: UserForm, id?: string) => void
   editUser: User | null
 }
 
@@ -29,7 +29,7 @@ const Form: FC<FormProps> = ({ onSubmitData, editUser }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmitData(formData)
+    onSubmitData(formData, editUser?.id)
     setFormData({ first_name: "", last_name: "", region: "", gender: "" })
   }
 
@@ -67,10 +67,11 @@ const Form: FC<FormProps> = ({ onSubmitData, editUser }) => {
         placeholder="Gender"
       />
       <button type="submit" className="bg-[gray] text-white px-3 py-1 rounded">
-        Add
+        {editUser ? "Update" : "Add"}
       </button>
     </form>
   )
 }
 
 export default Form
+
