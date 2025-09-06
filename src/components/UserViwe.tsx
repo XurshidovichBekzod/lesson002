@@ -18,7 +18,6 @@ const UserView: FC<Props> = ({ users, onEdit, onDelete }) => {
             <p>Gender: {user.gender}</p>
           </div>
           <div className="flex h-[30px] w-[300px] gap-2">
-           
             <button
               onClick={() => onDelete(user.id)}
               className="bg-[gray] text-white px-2 rounded"

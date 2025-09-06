@@ -29,7 +29,7 @@ const Form: FC<FormProps> = ({ onSubmitData, editUser }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmitData(formData) // faqat POST ishlaydi
+    onSubmitData(formData)
     setFormData({ first_name: "", last_name: "", region: "", gender: "" })
   }
 
